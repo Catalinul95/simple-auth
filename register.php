@@ -10,7 +10,7 @@ session_start();
 // if the form was submitted, then a POST request was sent to this file
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  // if one of the fields is empty ( no data was submitted )
+  //FORM VALIDATION: if one of the fields is empty ( no data was submitted )
   // TODO: make it cleaner
   if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password_confirmation'])) {
     // store form validation errors in a session
@@ -25,6 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = trim($_POST['email']);
   $password = $_POST['password'];
   $passwordConfirm = $_POST['password_confirmation'];
+
+  //FORM VALIDATION: check length
+  if (strlen($username) < 6 || strlen($username) > 64) {
+    $_SESSION['errors'][] = 'The username must be between 6 and 64 characters.';
+    header('Location: register.php');
+    exit;
+  }
+
+  if (strlen($password) < 6 || strlen($password) > 64) {
+    $_SESSION['errors'][] = 'The password must be between 6 and 64 characters.';
+    header('Location: register.php');
+    exit;
+  }
 }
 
 ?>
