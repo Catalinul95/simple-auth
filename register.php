@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: register.php');
     exit;
   }
+
+  // store submited data in variables
+  // using trim() we make sure to remove whitespaces
+  $username = trim($_POST['username']);
+  $email = trim($_POST['email']);
+  $password = $_POST['password'];
+  $passwordConfirm = $_POST['password_confirmation'];
 }
 
 ?>
