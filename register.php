@@ -69,6 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
+  // remove malicious characters from the data we want to save in database
+  $username = mysqli_real_escape_string($db, $username);
+  $email = mysqli_real_escape_string($db, $email);
+  $password = mysqli_real_escape_string($db, $password);
+
+  
 }
 
 ?>
