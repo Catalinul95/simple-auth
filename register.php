@@ -3,9 +3,14 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// if the formular was submitted, then a POST request was sent to this file
+// if the form was submitted, then a POST request was sent to this file
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  echo 'Submitted!';
+
+  // if one of the fields is empty ( no data was submitted )
+  // TODO: make it cleaner
+  if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password_confirmation'])) {
+    die('You must fill all the fields.');
+  }
 }
 
 ?>
