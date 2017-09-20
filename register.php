@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $query = mysqli_query($db, $sql) or die(mysqli_error($db));
 
   // redirect back
+  $_SESSION['messages'][] = 'Your account has been created with success.';
   header('Location: register.php');
   exit;
 }
@@ -110,6 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <hr>
       <?php if (isset($_SESSION['errors'])): ?>
         <p><b>Whoops!</b> <?=$_SESSION['errors'][0];?></p>
+      <?php endif; ?>
+      <?php if (isset($_SESSION['messages'])): ?>
+        <p><b>Success!</b> <?=$_SESSION['messages'][0];?></p>
       <?php endif; ?>
       <form action="register.php" method="post">
         <p>
@@ -132,5 +136,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // remove the form validation errors from the current session
 if (isset($_SESSION['errors'])) {
   unset($_SESSION['errors']);
+}
+
+// remove the messages from the current session
+if (isset($_SESSION['messages'])) {
+  unset($_SESSION['messages']);
 }
 ?>
