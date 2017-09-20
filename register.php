@@ -87,6 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: register.php');
     exit;
   }
+
+  // save a new user in databas
+  $createdAt = date('Y-m-d H:i:s');
+  $sql = "INSERT INTO users (username, email, password, created_at) VALUES ('{$username}', '{$email}', '{$password}', '{$createdAt}')";
+  $query = mysqli_query($db, $sql) or die(mysqli_error($db));
+
+  // redirect back
+  header('Location: register.php');
+  exit;
 }
 
 ?>
