@@ -62,7 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-
+  //FORM Validation: make sure the email is valid
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['errors'][] = 'Please enter a valid email address.';
+    header('Location: register.php');
+    exit;
+  }
 
 }
 
