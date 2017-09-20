@@ -38,6 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: register.php');
     exit;
   }
+
+  //FORM VALIDATION: check if username contains only letters
+  if (!ctype_alpha($username)) {
+    $_SESSION['errors'][] = 'The username must contain only letters.';
+    header('Location: register.php');
+    exit;
+  }
 }
 
 ?>
