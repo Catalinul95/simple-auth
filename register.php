@@ -45,6 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: register.php');
     exit;
   }
+
+  //FORM VALIDATION: make sure password matches
+  if ($password !== $passwordConfirm) {
+    $_SESSION['errors'][] = 'The password does not match.';
+    header('Location: register.php');
+    exit;
+  }
 }
 
 ?>
