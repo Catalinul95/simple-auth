@@ -74,6 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = mysqli_real_escape_string($db, $email);
   $password = mysqli_real_escape_string($db, $password);
 
+  // let's hash the password for storing it in database
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
   
 }
 
