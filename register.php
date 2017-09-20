@@ -3,7 +3,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
+// if the formular was submitted, then a POST request was sent to this file
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  echo 'Submitted!';
+}
 
 ?>
 <!DOCTYPE html>
