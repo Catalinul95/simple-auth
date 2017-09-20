@@ -77,7 +77,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // let's hash the password for storing it in database
   $password = password_hash($password, PASSWORD_DEFAULT);
 
-  
+  // we have to check if the username or the email are already taken
+  $sql = "SELECT id FROM users WHERE username = '{$username}' OR email = '{$email}'";
+  $query = mysqli_query($db, $sql) or die(mysqli_error($db));
+
+  // how many records are found
+  if (mysqli_num_rows($query) > 0) {
+    $_SESSION['errors'][] = 'The username or the email are already taken.';
+    header('Location: register.php');
+    exit;
+  }
 }
 
 ?>
