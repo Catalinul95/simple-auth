@@ -1,6 +1,13 @@
 <?php
 require_once __DIR__ . '/init.php';
 
+// make sure user can't access this page if he is logged in
+if (isset($_SESSION['user'])) {
+  header('Location: index.php');
+  exit;
+}
+
+
 // if the form was submitted, then a POST request was sent to this file
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
