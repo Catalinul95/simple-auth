@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
+  // store in a session all the user data and redirect to home page
+  $_SESSION['user'] = $user;
+  header('Location: index.php');
+  exit;
 }
 
 // include the view file used for this page
