@@ -15,6 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = mysqli_real_escape_string($db, $_POST['email']);
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
+  // check if the credentials are correct
+  $sql = "SELECT id, username, password FROM users WHERE email = '{$email}'";
+  $query = mysqli_query($db, $sql) or die(mysqli_error($db));
+
+  // store the query result
+  $user = mysqli_fetch_assoc($query);
+
+  // if there was no data found or the password is invalid
+  if (!$user || !password_verify($password, $user['password'])) {
+    $_SESSION['errors'][] = 'Invalid email or password.';
+    header('Location: login.php');
+    exit;
+  }
+
 }
 
 // include the view file used for this page
